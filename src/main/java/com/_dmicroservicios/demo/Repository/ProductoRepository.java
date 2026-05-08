@@ -1,0 +1,15 @@
+package com._dmicroservicios.demo.Repository;
+
+import com._dmicroservicios.demo.Model.Producto;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+
+
+@Repository
+public interface ProductoRepository extends JpaRepository<Producto, Long> {
+
+    Producto findByNombreProducto(String nombre);
+    Producto findByCategoriaProducto(String categoria);
+
+}
