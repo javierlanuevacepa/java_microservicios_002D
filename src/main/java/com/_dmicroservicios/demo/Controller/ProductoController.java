@@ -17,7 +17,7 @@ import com._dmicroservicios.demo.Model.Producto;
 import com._dmicroservicios.demo.Service.ProductoService;
 
 @RestController
-@RequestMapping("/v0/producto")
+@RequestMapping("/api/producto")
 public class ProductoController {
     
     private final ProductoService productoService;

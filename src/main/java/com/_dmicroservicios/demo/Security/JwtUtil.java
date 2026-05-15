@@ -2,13 +2,9 @@ package com._dmicroservicios.demo.Security;
 
 
 import io.jsonwebtoken.*;
-
-import io.jsonwebtoken.*;
-import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import java.util.Date;

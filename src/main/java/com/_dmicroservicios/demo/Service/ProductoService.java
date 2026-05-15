@@ -45,21 +45,4 @@ public class ProductoService {
         productoExistente.setActivo(false);
         productoRepository.save(productoExistente);
     }
-
-    public Producto obtenerProductoPorId(Long id) {
-        return productoRepository.findById(id).orElseThrow(() -> new RuntimeException("Producto no encontrado"));
-    }
-
-    public Producto obtenerProductoPorNombre(String nombre) {
-        return productoRepository.findByNombreProducto(nombre);
-    }
-
-    public Producto obtenerProductoPorCategoria(String categoria) {
-        return productoRepository.findByCategoriaProducto(categoria);
-    }
-
-
-
-
-
 }

@@ -34,8 +34,8 @@ public class SecurityConfig {
         // Creamos el usuario en memoria con la autoridad "ADMINISTRADOR" 
         // para que coincida exactamente con tus reglas de requestMatchers
         UserDetails admin = User.builder()
-                .username("admintechstore@techstore.com")
-                .password("{noop}123456") // {noop} indica que la contraseña va sin encriptar para esta prueba
+                .username("admin")
+                .password(passwordEncoder().encode("123")) // {noop} indica que la contraseña va sin encriptar para esta prueba
                 .authorities("ADMINISTRADOR")
                 .build();
 
@@ -49,24 +49,22 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .authorizeHttpRequests(auth -> auth
-                
-                .requestMatchers("/api/test-auth/**").permitAll() 
+
+                .requestMatchers("/api/test-auth/**").permitAll()
                 .requestMatchers("/auth/**").permitAll()
 
-               
-                .requestMatchers(HttpMethod.GET, "/v0/producto/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/v0/producto/**").hasAuthority("ADMINISTRADOR")
-                .requestMatchers(HttpMethod.PUT, "/v0/producto/**").hasAuthority("ADMINISTRADOR")
-                .requestMatchers(HttpMethod.DELETE, "/v0/producto/**").hasAuthority("ADMINISTRADOR")
+                .requestMatchers(HttpMethod.GET, "/api/producto/**").hasAuthority("ADMINISTRADOR")
+                .requestMatchers(HttpMethod.POST, "/api/producto/**").hasAuthority("ADMINISTRADOR")
+                .requestMatchers(HttpMethod.PUT, "/api/producto/**").hasAuthority("ADMINISTRADOR")
+                .requestMatchers(HttpMethod.DELETE, "/api/producto/**").hasAuthority("ADMINISTRADOR")
 
-               
                 .anyRequest().authenticated()
             )
             .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
-    }
+}
 
     @Bean
     public RestTemplate restTemplate() {
@@ -86,7 +84,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:5432"));
+        configuration.setAllowedOrigins(List.of("*"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);

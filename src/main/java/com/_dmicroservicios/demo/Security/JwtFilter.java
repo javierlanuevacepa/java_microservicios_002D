@@ -1,6 +1,7 @@
 package com._dmicroservicios.demo.Security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +23,7 @@ public class JwtFilter extends OncePerRequestFilter {
     private JwtUtil jwtUtils;
 
     @Autowired
+    @Lazy
     private UserDetailsService userDetailsService;
 
     @Override
