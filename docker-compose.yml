@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+
+  postgres:
+
+    image: postgres:16
+
+    container_name: techstore-db
+
+    restart: always
+
+    environment:
+      POSTGRES_DB: techstore
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  api:
+
+    build: .
+
+    container_name: techstore-api
+
+    depends_on:
+      - postgres
+
+    ports:
+      - "9090:9090"
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/techstore
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin123
+
+volumes:
+
+  postgres-data:
