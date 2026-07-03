@@ -29,7 +29,7 @@ public class ProductoService {
         "CREAR",
         producto.getId(),
         "admin@techstore.cl",
-        Instant.now()
+        Instant.now().toString()
         );
     sqsService.enviarAuditoria(evento);
 
@@ -57,7 +57,7 @@ public class ProductoService {
         "ACTUALIZAR",
         productoExistente.getId(),
         "admin@techstore.cl",
-        Instant.now()
+        Instant.now().toString()
         );
     sqsService.enviarAuditoria(evento);
 
@@ -74,7 +74,7 @@ public class ProductoService {
         "ELIMINAR",
         productoExistente.getId(),
         "admin@techstore.cl",
-        Instant.now()
+        Instant.now().toString()
         );
        sqsService.enviarAuditoria(evento);
 

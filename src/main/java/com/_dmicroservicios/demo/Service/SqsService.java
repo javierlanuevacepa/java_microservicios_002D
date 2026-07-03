@@ -17,9 +17,9 @@ public class SqsService {
     private final SqsClient sqsClient;
     private final ObjectMapper objectMapper;
 
-    public SqsService(SqsClient sqsClient) {
+    public SqsService(SqsClient sqsClient, ObjectMapper objectMapper) {
         this.sqsClient = sqsClient;
-        this.objectMapper = new ObjectMapper();
+        this.objectMapper = objectMapper;
     }
 
     public void enviarAuditoria(AuditoriaEvent evento) {

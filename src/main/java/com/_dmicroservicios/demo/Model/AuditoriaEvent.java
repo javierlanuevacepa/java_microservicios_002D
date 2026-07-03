@@ -1,17 +1,17 @@
 package com._dmicroservicios.demo.Model;
 
-import java.time.Instant;
+
 
 public class AuditoriaEvent {
 
     private String accion;
     private Long productoId;
     private String usuario;
-    private Instant fecha;
+    private String fecha;
 
     public AuditoriaEvent() {}
 
-    public AuditoriaEvent(String accion, Long productoId, String usuario, Instant fecha) {
+    public AuditoriaEvent(String accion, Long productoId, String usuario, String fecha) {
         this.accion = accion;
         this.productoId = productoId;
         this.usuario = usuario;
@@ -42,11 +42,11 @@ public class AuditoriaEvent {
         this.usuario = usuario;
     }
 
-    public Instant getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Instant fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 }
