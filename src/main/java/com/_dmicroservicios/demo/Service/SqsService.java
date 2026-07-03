@@ -15,18 +15,29 @@ public class SqsService {
     private String queueUrl;
 
     private final SqsClient sqsClient;
-    private final ObjectMapper objectMapper;
 
-    public SqsService(SqsClient sqsClient, ObjectMapper objectMapper) {
+
+    public SqsService(SqsClient sqsClient) {
         this.sqsClient = sqsClient;
-        this.objectMapper = objectMapper;
+        
     }
 
     public void enviarAuditoria(AuditoriaEvent evento) {
 
         try {
 
-            String json = objectMapper.writeValueAsString(evento);
+           String json = String.format("""
+           {
+             "accion":"%s",
+             "productoId":%d,
+             "usuario":"%s",
+             "fecha":"%s"
+           }
+           """,
+                   evento.getAccion(),
+                   evento.getProductoId(),
+                   evento.getUsuario(),
+                   evento.getFecha());
 
             SendMessageRequest request = SendMessageRequest.builder()
                     .queueUrl(queueUrl)
